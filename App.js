@@ -1,10 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Login from './components/Login';
+import RegisterForm from './components/RegisterForm';
+import Members from './components/Members';
+import Services from './components/Services';
+import { FlatList } from 'react-native-web';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    
+        
+      <Members/>
+    
+   
+      <Services/>
+   
       <StatusBar style="auto" />
     </View>
   );
