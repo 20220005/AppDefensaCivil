@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import axios from 'axios';
 
 const RegisterForm = () => {
   const [cedula, setCedula] = useState('');
@@ -12,25 +11,44 @@ const RegisterForm = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleRegister = async () => {
-    try {
-     
-      const userData = {
-        cedula: cedula,
-        nombre: nombre,
-        apellido: apellido,
-        clave: clave,
-        correo: correo,
-        telefono: telefono
-      };
+    const cedulaValue = cedula.trim();
+    const nombreValue = nombre.trim();
+    const apellidoValue = apellido.trim();
+    const claveValue = clave.trim();
+    const correoValue = correo.trim();
+    const telefonoValue = telefono.trim();
 
-      
-      const response = await axios.post('https://adamix.net/defensa_civil/def/registro.php', userData);
+    if (!cedulaValue || !nombreValue || !apellidoValue || !claveValue || !correoValue || !telefonoValue) {
+      alert('Todos los campos son requeridos.');
+    } else {
+      const url = 'https://adamix.net/defensa_civil/def/registro.php';
+      const data = new FormData();
+      data.append('cedula', cedulaValue);
+      data.append('nombre', nombreValue);
+      data.append('apellido', apellidoValue);
+      data.append('clave', claveValue);
+      data.append('correo', correoValue);
+      data.append('telefono', telefonoValue);
 
-      console.log('Respuesta del servidor:', response.data);
-    
-    } catch (error) {
-      console.error('Error al registrar:', error);
-      
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          body: data
+        });
+        const responseData = await response.json();
+
+        if (responseData.exito) {
+          alert('Registro exitoso');
+          console.log('Respuesta del servidor:', responseData);
+        } else {
+          alert('Error al registrar');
+          console.log('Error al registrar:', responseData);
+          setErrorMessage(responseData.mensaje);
+        }
+      } catch (error) {
+        console.error('Error al registrar:', error);
+        setErrorMessage('Error al registrar, por favor intente nuevamente.');
+      }
     }
   };
 
