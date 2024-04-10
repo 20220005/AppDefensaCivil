@@ -10,11 +10,14 @@ export default function App() {
   return (
     <View style={styles.container}>
     
-        
+    <RegisterForm/>
+
+    <Login/>
+{/*         
       <Members/>
     
    
-      <Services/>
+      <Services/> */}
    
       <StatusBar style="auto" />
     </View>

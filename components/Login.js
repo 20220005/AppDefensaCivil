@@ -5,11 +5,36 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-   
-    console.log('Email:', email);
-    console.log('Password:', password);
-   
+  const handleLogin = async () => {
+    const emailValue = email.trim();
+    const passwordValue = password.trim();
+
+    if (!emailValue || !passwordValue) {
+      alert('Todos los campos son requeridos.');
+    } else {
+      const url = "https://adamix.net/defensa_civil/def/iniciar_sesion.php";
+      const data = new FormData();
+      data.append('cedula', emailValue);
+      data.append('clave', passwordValue);
+
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          body: data
+        });
+        const responseData = await response.json();
+
+        if (responseData.exito) {
+          alert('Inicio de sesión exitoso');
+          console.log('Respuesta del servidor:', responseData);
+        } else {
+          alert('Error al iniciar sesión');
+          console.log('Error al iniciar sesión:', responseData);
+        }
+      } catch (error) {
+        console.error('Error al iniciar sesión:', error);
+      }
+    }
   };
 
   return (
@@ -17,7 +42,7 @@ const LoginForm = () => {
       <Text style={styles.title}>Inicio de Sesión</Text>
       <TextInput
         style={styles.input}
-        placeholder="Cedula"
+        placeholder="Cédula"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
