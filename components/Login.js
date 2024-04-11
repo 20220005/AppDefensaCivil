@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const LoginForm = () => {
-  const [email, setEmail] = useState('');
+  const [cedula, setCedula] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
   const handleLogin = async () => {
-    const emailValue = email.trim();
+    const cedulaValue = cedula.trim();
     const passwordValue = password.trim();
 
-    if (!emailValue || !passwordValue) {
+    if (!cedulaValue || !passwordValue) {
       alert('Todos los campos son requeridos.');
     } else {
       const url = "https://adamix.net/defensa_civil/def/iniciar_sesion.php";
       const data = new FormData();
-      data.append('cedula', emailValue);
+      data.append('cedula', cedulaValue);
       data.append('clave', passwordValue);
 
       try {
@@ -25,7 +27,10 @@ const LoginForm = () => {
         const responseData = await response.json();
 
         if (responseData.exito) {
+          navigation.navigate('Noticias Especificas', { userName: responseData.datos.nombre, userToken: responseData.datos.token });
           alert('Inicio de sesión exitoso');
+          setCedula("");
+          setPassword("")
           console.log('Respuesta del servidor:', responseData);
         } else {
           alert('Error al iniciar sesión');
@@ -43,8 +48,8 @@ const LoginForm = () => {
       <TextInput
         style={styles.input}
         placeholder="Cédula"
-        value={email}
-        onChangeText={setEmail}
+        value={cedula}
+        onChangeText={setCedula}
         keyboardType="email-address"
         autoCapitalize="none"
       />
