@@ -9,6 +9,7 @@ import Registrar from './components/RegisterForm';
 import Servicios from './components/Services';
 import Noticias from "./components/Noticias"
 import Videos from "./components/Videos";
+import Albergues from "./components/Albergues";
 
 const Drawer = createDrawerNavigator();
 
@@ -23,6 +24,7 @@ const App = () => {
         <Drawer.Screen name='Servicios' component={Servicios} />
         <Drawer.Screen name='Noticias' component={Noticias} />
         <Drawer.Screen name='Videos' component={Videos} />
+        <Drawer.Screen name='Albergues' component={Albergues} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

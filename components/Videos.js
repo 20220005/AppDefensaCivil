@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity, Linking  } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import Loader from './Loader';
 import axios from 'axios';
 
@@ -8,24 +9,26 @@ const Videos = () => {
   const [loading, setLoading] = useState(true);
   const flatListRef = useRef(null); 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('https://adamix.net/defensa_civil/def/videos.php');
-        setVideos(response.data.datos);
-        setLoading(false);
-        // Desplaza el FlatList al primer ítem cuando se cargan los datos
-        if (flatListRef.current) {
-            flatListRef.current.scrollToIndex({ animated: true, index: 0 });
-        }
-      } catch (error) {
-        console.error('Error al obtener los datos:', error);
-        setLoading(false);
-      }
-    };
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('https://adamix.net/defensa_civil/def/videos.php');
+      setVideos(response.data.datos);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error al obtener los datos:', error);
+      setLoading(false);
+    }
+  };
 
-    fetchData();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchData();
+      // Desplaza el FlatList al primer ítem cuando se cargan los datos
+      if (flatListRef.current) {
+        flatListRef.current.scrollToIndex({ animated: true, index: 0 });
+    }
+    }, [])
+  );
 
   const renderVideoCard = ({ item }) => (
     <TouchableOpacity style={styles.card} onPress={() => handleVideoPress(item.link)}>
@@ -33,6 +36,7 @@ const Videos = () => {
       <View style={styles.textContainer}>
         <Text style={styles.cardTitle}>{item.titulo}</Text>
         <Text style={styles.description}>{item.descripcion}</Text>
+        {/* Agregar fecha */}
       </View>
     </TouchableOpacity>
   );

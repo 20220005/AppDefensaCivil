@@ -29,6 +29,10 @@ const Sidebar = ({ navigation }) => {
           title="Videos"
           onPress={() => navigation.navigate('Videos')}
           />
+          <Button
+          title="Albergues"
+          onPress={() => navigation.navigate('Albergues')}
+          />
 
         </View>
         <View style={styles.bottom}>
