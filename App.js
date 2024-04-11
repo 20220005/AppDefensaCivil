@@ -1,31 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import Sidebar from './components/SideBar';
+import HomeScreen from './screens/HomeScreen';
 import Login from './components/Login';
-import RegisterForm from './components/RegisterForm';
-import Members from './components/Members';
-import Services from './components/Services';
-import { FlatList } from 'react-native-web';
+import Miembros from './components/Members';
+import Registrar from './components/RegisterForm';
+import Servicios from './components/Services';
+import Noticias from "./components/Noticias"
 
-export default function App() {
+const Drawer = createDrawerNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-    
-        
-      <Members/>
-    
-   
-      <Services/>
-   
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Drawer.Navigator drawerContent={({ navigation }) => <Sidebar navigation={navigation} />}>
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Login" component={Login} />
+        <Drawer.Screen name="Registrar" component={Registrar} />
+        <Drawer.Screen name='Miembros' component={Miembros} />
+        <Drawer.Screen name='Servicios' component={Servicios} />
+        <Drawer.Screen name='Noticias' component={Noticias} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
