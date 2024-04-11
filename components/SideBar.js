@@ -9,22 +9,26 @@ const Sidebar = ({ navigation }) => {
         <Text>Menu</Text>
       </View>
         <View style={styles.mid}>
-        <Button
-        title="Home"
-        onPress={() => navigation.navigate('Home')}
-      />
-      <Button
-        title="Miembros"
-        onPress={() => navigation.navigate('Miembros')}
-      />
-         <Button
-        title="Servicios"
-        onPress={() => navigation.navigate('Servicios')}
-      />
-           <Button
-        title="Noticias"
-        onPress={() => navigation.navigate('Noticias')}
-      />
+          <Button
+          title="Home"
+          onPress={() => navigation.navigate('Home')}
+          />
+          <Button
+          title="Miembros"
+          onPress={() => navigation.navigate('Miembros')}
+          />
+          <Button
+          title="Servicios"
+          onPress={() => navigation.navigate('Servicios')}
+          />
+          <Button
+          title="Noticias"
+          onPress={() => navigation.navigate('Noticias')}
+          />
+          <Button
+          title="Videos"
+          onPress={() => navigation.navigate('Videos')}
+          />
 
         </View>
         <View style={styles.bottom}>
