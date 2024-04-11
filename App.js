@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Miembros from './components/Members';
 import Registrar from './components/RegisterForm';
 import Servicios from './components/Services';
+import Noticias from "./components/Noticias"
 
 const Drawer = createDrawerNavigator();
 
@@ -19,6 +20,7 @@ const App = () => {
         <Drawer.Screen name="Registrar" component={Registrar} />
         <Drawer.Screen name='Miembros' component={Miembros} />
         <Drawer.Screen name='Servicios' component={Servicios} />
+        <Drawer.Screen name='Noticias' component={Noticias} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
