@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Pressable
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -86,6 +87,15 @@ const LoginForm = () => {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
+
+      <Pressable
+            style={{ ...styles.button, backgroundColor: "#0a509e" ,}}
+            onPress={() => navigation.navigate("Recuperar")}
+          >
+            <Text style={{...styles.text,color:'white'}}>Recuperar Contraseña</Text>
+          </Pressable>
+
+
     </View>
   );
 };
