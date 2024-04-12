@@ -39,7 +39,7 @@ const LoginForm = () => {
           await AsyncStorage.setItem("telefono", responseData.datos.telefono);
           await AsyncStorage.setItem("correo", responseData.datos.correo);
 
-
+          // Para obtener los datos guardados en AsyncStorage:
           // const token = await AsyncStorage.getItem("token");
           // const nombre = await AsyncStorage.getItem("nombre");
           // const apellido = await AsyncStorage.getItem("apellido");
@@ -50,12 +50,14 @@ const LoginForm = () => {
           navigation.navigate("Noticias Especificas", {
             userName: responseData.datos.nombre,
             userToken: responseData.datos.token,
+            reloadSideBar:true
           });
-          alert("Inicio de sesión exitoso");
+
+         
           setCedula("");
           setPassword("");
         } else {
-          alert("Error al iniciar sesión");
+          alert("Usuario o contraseña incorrectos.");
           console.log("Error al iniciar sesión:", responseData);
         }
       } catch (error) {
