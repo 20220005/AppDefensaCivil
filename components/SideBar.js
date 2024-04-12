@@ -4,21 +4,21 @@ import icono from "../assets/icon-defensa-civil.png";
 
 const Sidebar = ({ navigation }) => {
   const menuItems = [
-    { key: "home", title: "HOME" },
-    { key: "miembros", title: "MIEMBROS" },
-    { key: "servicios", title: "SERVICIOS" },
-    { key: "noticias", title: "NOTICIAS" },
-    { key: "videos", title: "VIDEOS" },
-    { key: "albergues", title: "ALBERGUES" }
+    { key: "Home", title: "HOME" },
+    { key: "Miembros", title: "MIEMBROS" },
+    { key: "Servicios", title: "SERVICIOS" },
+    { key: "Noticias", title: "NOTICIAS" },
+    { key: "Videos", title: "VIDEOS" },
+    { key: "Albergues", title: "ALBERGUES" }
   ];
-  const menuItemsLogin= [
-    { key: "home", title: "HOME" },
-    { key: "miembros", title: "MIEMBROS" },
-    { key: "servicios", title: "SERVICIOS" },
-    { key: "noticias", title: "NOTICIAS" },
-    { key: "videos", title: "VIDEOS" },
-    { key: "albergues", title: "ALBERGUES" }
-  ];
+const menuItemsLogin = [
+  { key: "Home", title: "HOME" },
+  { key: "Miembros", title: "MIEMBROS" },
+  { key: "Servicios", title: "SERVICIOS" },
+  { key: "Noticias", title: "NOTICIAS" },
+  { key: "Videos", title: "VIDEOS" },
+  { key: "Albergues", title: "ALBERGUES" }
+];
 
   const renderItem = ({ item }) => (
     <View style={styles.mid}>
@@ -51,7 +51,7 @@ const Sidebar = ({ navigation }) => {
         >
           <Text style={styles.text}>REGISTRARSE</Text>
         </Pressable>
-        
+
         <Pressable
           style={{ ...styles.button, backgroundColor: "#0a509e" }}
           onPress={() => navigation.navigate("Login")}
