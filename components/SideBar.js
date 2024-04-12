@@ -1,33 +1,88 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, Pressable, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Pressable,
+  FlatList,
+} from "react-native";
 import icono from "../assets/icon-defensa-civil.png";
+import { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const Sidebar = ({ navigation }) => {
-  const menuItems = [
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const checkLoginStatus = async () => {
+    try {
+      const token = await AsyncStorage.getItem("token");
+ 
+      if (token) {
+        
+        setIsLoggedIn(true);
+      }
+      else{
+        setIsLoggedIn(false);
+      }
+    } catch (error) {
+      console.error("Error al obtener el token de AsyncStorage:", error);
+    }
+  };
+  
+  useEffect(() => {
+    
+
+    checkLoginStatus();
+  }, [isLoggedIn,checkLoginStatus]);
+
+const logout = async () => {
+  try {
+    await AsyncStorage.removeItem("token");
+    await AsyncStorage.removeItem("nombre");
+    await AsyncStorage.removeItem("apellido");
+    await AsyncStorage.removeItem("correo");
+    await AsyncStorage.removeItem("telefono");
+    setIsLoggedIn(false);
+    navigation.navigate("Home");
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error);
+  }
+};
+
+const menuItems = [
     { key: "Home", title: "HOME" },
-    { key: "Miembros", title: "MIEMBROS" },
     { key: "Servicios", title: "SERVICIOS" },
     { key: "Noticias", title: "NOTICIAS" },
     { key: "Videos", title: "VIDEOS" },
-    { key: "Albergues", title: "ALBERGUES" }
+    { key: "Albergues", title: "ALBERGUES" },
+    { key: "MapaAlbergues", title: "MAPA ALBERGUES" },
+    { key: "MedidasPreventivas", title: "MEDIDAS PREVENTIVAS" },
+    { key: "Miembros", title: "MIEMBROS" },
+    { key: "QuieroSerVoluntario", title: "QUIERO SER VOLUNTARIO" },
   ];
-const menuItemsLogin = [
-  { key: "Home", title: "HOME" },
-  { key: "Miembros", title: "MIEMBROS" },
-  { key: "Servicios", title: "SERVICIOS" },
-  { key: "Noticias", title: "NOTICIAS" },
-  { key: "Videos", title: "VIDEOS" },
-  { key: "Albergues", title: "ALBERGUES" }
-];
+  const menuItemsLogin = [
+    { key: "Home", title: "HOME" },
+    { key: "Servicios", title: "SERVICIOS" },
+    { key: "Noticias", title: "NOTICIAS" },
+    { key: "Videos", title: "VIDEOS" },
+    { key: "Albergues", title: "ALBERGUES" },
+    { key: "MapaAlbergues", title: "MAPA ALBERGUES" },
+    { key: "MedidasPreventivas", title: "MEDIDAS PREVENTIVAS" },
+    { key: "Miembros", title: "MIEMBROS" },
+    { key: "QuieroSerVoluntario", title: "QUIERO SER VOLUNTARIO" },
+    { key: "Extras", title: "EXTRAS" },
+
+  ];
 
   const renderItem = ({ item }) => (
     <View style={styles.mid}>
-    <Pressable
-      style={styles.button}
-      onPress={() => navigation.navigate(item.key)}
-    >
-      <Text style={styles.text}>{item.title}</Text>
-    </Pressable>
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate(item.key)}
+      >
+        <Text style={styles.text}>{item.title}</Text>
+      </Pressable>
     </View>
   );
 
@@ -37,29 +92,45 @@ const menuItemsLogin = [
         <Image source={icono} style={styles.icono} />
       </View>
       <View style={styles.mid}>
-        <FlatList
-          data={menuItems}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.key}
-      
-        />
+        {isLoggedIn ? (
+          <FlatList
+            data={menuItemsLogin}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.key}
+            style={styles.flatlist}
+          />
+        ) : (
+          <FlatList
+            data={menuItems}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.key}
+            style={styles.flatlist}
+          />
+        )}
       </View>
       <View style={styles.bottom}>
-      <Pressable
+        <Pressable
           style={{ ...styles.button, backgroundColor: "#0a509e" }}
           onPress={() => navigation.navigate("Registrar")}
         >
-          <Text style={styles.text}>REGISTRARSE</Text>
+          <Text style={{...styles.text,color:'white'}}>REGISTRARSE</Text>
         </Pressable>
 
-        <Pressable
-          style={{ ...styles.button, backgroundColor: "#0a509e" }}
-          onPress={() => navigation.navigate("Login")}
-        >
-          <Text style={styles.text}>INICIAR SESIÓN</Text>
-        </Pressable>
-
-       
+        {isLoggedIn ? (
+          <Pressable
+            style={{ ...styles.button, backgroundColor: "red" }}
+            onPress={() => logout()}
+          >
+            <Text style={{...styles.text,color:'white'}}>CERRAR SESIÓN</Text>
+          </Pressable>
+        ) : (
+          <Pressable
+            style={{ ...styles.button, backgroundColor: "#0a509e" ,}}
+            onPress={() => navigation.navigate("Login")}
+          >
+            <Text style={{...styles.text,color:'white'}}>INICIAR SESIÓN</Text>
+          </Pressable>
+        )}
       </View>
     </View>
   );
@@ -86,20 +157,26 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   mid: {
+    flex:1,
+    height: "55%",
+    
+
+  },
+  flatlist: {
     flex: 1,
     padding: 10,
-    gap: 5,
-   
+    
   },
+ 
   button: {
     alignItems: "center",
     justifyContent: "center",
-    padding: 10,
-    backgroundColor: "#fb7405",
+    padding: 8,
+    backgroundColor: "white",
     borderRadius: 5,
   },
   text: {
-    color: "white",
+    color: "#fb7405",
     fontWeight: "bold",
   },
   bottom: {
