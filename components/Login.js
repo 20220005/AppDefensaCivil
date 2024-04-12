@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const LoginForm = () => {
-  const [cedula, setCedula] = useState('');
-  const [password, setPassword] = useState('');
+  const [cedula, setCedula] = useState("");
+  const [password, setPassword] = useState("");
   const navigation = useNavigation();
 
   const handleLogin = async () => {
@@ -12,32 +18,48 @@ const LoginForm = () => {
     const passwordValue = password.trim();
 
     if (!cedulaValue || !passwordValue) {
-      alert('Todos los campos son requeridos.');
+      alert("Todos los campos son requeridos.");
     } else {
       const url = "https://adamix.net/defensa_civil/def/iniciar_sesion.php";
       const data = new FormData();
-      data.append('cedula', cedulaValue);
-      data.append('clave', passwordValue);
+      data.append("cedula", cedulaValue);
+      data.append("clave", passwordValue);
 
       try {
         const response = await fetch(url, {
-          method: 'POST',
-          body: data
+          method: "POST",
+          body: data,
         });
         const responseData = await response.json();
 
         if (responseData.exito) {
-          navigation.navigate('Noticias Especificas', { userName: responseData.datos.nombre, userToken: responseData.datos.token });
-          alert('Inicio de sesión exitoso');
+          await AsyncStorage.setItem("token", responseData.datos.token);
+          await AsyncStorage.setItem("nombre", responseData.datos.nombre);
+          await AsyncStorage.setItem("apellido", responseData.datos.apellido);
+          await AsyncStorage.setItem("telefono", responseData.datos.telefono);
+          await AsyncStorage.setItem("correo", responseData.datos.correo);
+
+
+          // const token = await AsyncStorage.getItem("token");
+          // const nombre = await AsyncStorage.getItem("nombre");
+          // const apellido = await AsyncStorage.getItem("apellido");
+          // const telefono = await AsyncStorage.getItem("telefono")
+          // const correo = await AsyncStorage.getItem("correo");
+
+
+          navigation.navigate("Noticias Especificas", {
+            userName: responseData.datos.nombre,
+            userToken: responseData.datos.token,
+          });
+          alert("Inicio de sesión exitoso");
           setCedula("");
-          setPassword("")
-          console.log('Respuesta del servidor:', responseData);
+          setPassword("");
         } else {
-          alert('Error al iniciar sesión');
-          console.log('Error al iniciar sesión:', responseData);
+          alert("Error al iniciar sesión");
+          console.log("Error al iniciar sesión:", responseData);
         }
       } catch (error) {
-        console.error('Error al iniciar sesión:', error);
+        console.error("Error al iniciar sesión:", error);
       }
     }
   };
@@ -70,31 +92,31 @@ const LoginForm = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
   },
   title: {
     fontSize: 24,
     marginBottom: 20,
   },
   input: {
-    width: '80%',
+    width: "80%",
     height: 40,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 5,
     marginBottom: 10,
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: "blue",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
   },
 });
