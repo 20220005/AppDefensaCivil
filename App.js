@@ -11,6 +11,7 @@ import Noticias from "./components/Noticias"
 import Videos from "./components/Videos";
 import Albergues from "./components/Albergues";
 import NoticiasEspecificas from "./components/NoticiasEspecificas";
+import ExtraScreen from "./screens/ExtraScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -27,6 +28,9 @@ const App = () => {
         <Drawer.Screen name='Videos' component={Videos} />
         <Drawer.Screen name='Albergues' component={Albergues} />
         <Drawer.Screen name='Noticias Especificas' component={NoticiasEspecificas} />
+       <Drawer.Screen name='Extras' component={ExtraScreen} />
+
+
        
       </Drawer.Navigator>
     </NavigationContainer>

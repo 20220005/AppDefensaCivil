@@ -49,22 +49,30 @@ const logout = async () => {
     console.error("Error al cerrar sesión:", error);
   }
 };
-  const menuItems = [
+
+const menuItems = [
     { key: "Home", title: "HOME" },
-    { key: "Miembros", title: "MIEMBROS" },
     { key: "Servicios", title: "SERVICIOS" },
     { key: "Noticias", title: "NOTICIAS" },
     { key: "Videos", title: "VIDEOS" },
     { key: "Albergues", title: "ALBERGUES" },
+    { key: "MapaAlbergues", title: "MAPA ALBERGUES" },
+    { key: "MedidasPreventivas", title: "MEDIDAS PREVENTIVAS" },
+    { key: "Miembros", title: "MIEMBROS" },
+    { key: "QuieroSerVoluntario", title: "QUIERO SER VOLUNTARIO" },
   ];
   const menuItemsLogin = [
     { key: "Home", title: "HOME" },
-    { key: "Miembros", title: "MIEMBROS" },
     { key: "Servicios", title: "SERVICIOS" },
     { key: "Noticias", title: "NOTICIAS" },
     { key: "Videos", title: "VIDEOS" },
-    { key: "Albergues", title: "ALBERGUES2" },
-    { key: "Albergues2", title: "Probando" },
+    { key: "Albergues", title: "ALBERGUES" },
+    { key: "MapaAlbergues", title: "MAPA ALBERGUES" },
+    { key: "MedidasPreventivas", title: "MEDIDAS PREVENTIVAS" },
+    { key: "Miembros", title: "MIEMBROS" },
+    { key: "QuieroSerVoluntario", title: "QUIERO SER VOLUNTARIO" },
+    { key: "Extras", title: "EXTRAS" },
+
   ];
 
   const renderItem = ({ item }) => (
@@ -89,12 +97,14 @@ const logout = async () => {
             data={menuItemsLogin}
             renderItem={renderItem}
             keyExtractor={(item) => item.key}
+            style={styles.flatlist}
           />
         ) : (
           <FlatList
             data={menuItems}
             renderItem={renderItem}
             keyExtractor={(item) => item.key}
+            style={styles.flatlist}
           />
         )}
       </View>
@@ -103,7 +113,7 @@ const logout = async () => {
           style={{ ...styles.button, backgroundColor: "#0a509e" }}
           onPress={() => navigation.navigate("Registrar")}
         >
-          <Text style={styles.text}>REGISTRARSE</Text>
+          <Text style={{...styles.text,color:'white'}}>REGISTRARSE</Text>
         </Pressable>
 
         {isLoggedIn ? (
@@ -111,14 +121,14 @@ const logout = async () => {
             style={{ ...styles.button, backgroundColor: "red" }}
             onPress={() => logout()}
           >
-            <Text style={styles.text}>CERRAR SESIÓN</Text>
+            <Text style={{...styles.text,color:'white'}}>CERRAR SESIÓN</Text>
           </Pressable>
         ) : (
           <Pressable
-            style={{ ...styles.button, backgroundColor: "#0a509e" }}
+            style={{ ...styles.button, backgroundColor: "#0a509e" ,}}
             onPress={() => navigation.navigate("Login")}
           >
-            <Text style={styles.text}>INICIAR SESIÓN</Text>
+            <Text style={{...styles.text,color:'white'}}>INICIAR SESIÓN</Text>
           </Pressable>
         )}
       </View>
@@ -147,19 +157,26 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   mid: {
+    flex:1,
+    height: "55%",
+    
+
+  },
+  flatlist: {
     flex: 1,
     padding: 10,
-    gap: 5,
+    
   },
+ 
   button: {
     alignItems: "center",
     justifyContent: "center",
-    padding: 10,
-    backgroundColor: "#fb7405",
+    padding: 8,
+    backgroundColor: "white",
     borderRadius: 5,
   },
   text: {
-    color: "white",
+    color: "#fb7405",
     fontWeight: "bold",
   },
   bottom: {

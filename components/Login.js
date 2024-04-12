@@ -50,7 +50,6 @@ const LoginForm = () => {
           navigation.navigate("Noticias Especificas", {
             userName: responseData.datos.nombre,
             userToken: responseData.datos.token,
-            reloadSideBar:true
           });
 
          
