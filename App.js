@@ -29,7 +29,8 @@ const App = () => {
         <Drawer.Screen name='Albergues' component={Albergues} />
         <Drawer.Screen name='Noticias Especificas' component={NoticiasEspecificas} />
        <Drawer.Screen name='Extras' component={ExtraScreen} />
-
+       
+       {/* Probando la rama de Omar */}
 
        
       </Drawer.Navigator>
