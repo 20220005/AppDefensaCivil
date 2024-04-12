@@ -5,7 +5,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
-     
+      <Text>Probando Omar</Text>
     </View>
   );
 };
