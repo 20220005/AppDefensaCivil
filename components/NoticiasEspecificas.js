@@ -30,16 +30,15 @@ const NoticiasEspecificas = () => {
 
   const renderNoticia = ({ item }) => (
     <View style={styles.noticiaContainer}>
-      <Text style={styles.titulo}>{item.titulo}</Text>
       <Text style={styles.fecha}>{item.fecha}</Text>
-      {/* Agrega aquí más detalles si es necesario */}
+      <Text style={styles.titulo}>{item.titulo}</Text>
     </View>
   );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.usuario}>Nombre del usuario: {userName}</Text>
-      <Text style={styles.token}>Token: {userToken}</Text>
+      {/* <Text style={styles.usuario}>Nombre del usuario: {userName}</Text>
+      <Text style={styles.token}>Token: {userToken}</Text> */}
       <FlatList
         data={noticias}
         renderItem={renderNoticia}
@@ -52,23 +51,12 @@ const NoticiasEspecificas = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0a509e',
     paddingHorizontal: 20,
     paddingTop: 20,
   },
-  usuario: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#333',
-  },
-  token: {
-    fontSize: 18,
-    marginBottom: 20,
-    color: '#333',
-  },
   noticiaContainer: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#fff',
     borderRadius: 10,
     marginBottom: 20,
     padding: 20,
@@ -80,8 +68,9 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   fecha: {
-    fontSize: 16,
-    color: '#666',
+    fontSize: 18,
+    color: '#fb7405',
+    fontWeight: 'bold',
   },
 });
 
