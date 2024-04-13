@@ -11,6 +11,11 @@ import Noticias from "./components/Noticias"
 import Videos from "./components/Videos";
 import Albergues from "./components/Albergues";
 import NoticiasEspecificas from "./components/NoticiasEspecificas";
+import ExtraScreen from "./screens/ExtraScreen";
+import MededidasPreventivas from './components/MedidasPreventivas';
+import RecuperarContraseña from './components/RecuperarContraseña';
+import ReportarSituacion from './components/ReportarSituacion';
+import MisSituacionesComponente from './components/MisSituaciones';
 
 const Drawer = createDrawerNavigator();
 
@@ -27,6 +32,12 @@ const App = () => {
         <Drawer.Screen name='Videos' component={Videos} />
         <Drawer.Screen name='Albergues' component={Albergues} />
         <Drawer.Screen name='Noticias Especificas' component={NoticiasEspecificas} />
+       <Drawer.Screen name='Extras' component={ExtraScreen} />
+       <Drawer.Screen name='MedidasPreventivas' component={MededidasPreventivas} />
+       <Drawer.Screen name='Recuperar' component={RecuperarContraseña} />
+      <Drawer.Screen name='Reportar Situacion' component={ReportarSituacion} />
+      <Drawer.Screen name='Mis Situaciones' component={MisSituacionesComponente} />
+       
       </Drawer.Navigator>
     </NavigationContainer>
   );
