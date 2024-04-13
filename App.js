@@ -17,6 +17,7 @@ import RecuperarContraseña from './components/RecuperarContraseña';
 import CambiarContraseña from './components/CambiarContrasea';
 import MapaInteractivo from './components/MapaInteractivo';
 import MisSituaciones from './components/MisSituaciones';
+import ReportarSituaciones from './components/ReportarSituacion';
 
 const Drawer = createDrawerNavigator();
 
@@ -39,6 +40,7 @@ const App = () => {
        <Drawer.Screen name='Cambiar Contraseña' component={CambiarContraseña} />
        <Drawer.Screen name='MapaAlbergues' component={MapaInteractivo} />
        <Drawer.Screen name='Mis Situaciones' component={MisSituaciones} />
+       <Drawer.Screen name='Reportar Situacion' component={ReportarSituaciones} />
 
        
       </Drawer.Navigator>
