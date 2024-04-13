@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Modal, Button, Image, StyleSheet, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Loader from './Loader';
 
 const MisSituacionesComponente = () => {
   const [situaciones, setSituaciones] = useState([]);
@@ -21,6 +22,7 @@ const MisSituacionesComponente = () => {
       const data = await response.json();
       if (data.exito) {
         setSituaciones(data.datos);
+        console.log("dTOA",data.datos);
       } else {
         console.error('Error al obtener las situaciones:', data.mensaje);
       }
@@ -41,11 +43,18 @@ const MisSituacionesComponente = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Mis Situaciones Reportadas</Text>
+  
+     
+
+         {
+            situaciones.length === 0 && <Loader />
+         }
+       
       <FlatList
         data={situaciones}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleSituacionPress(item)} style={styles.itemContainer}>
+          <TouchableOpacity onPress={() => handleSituacionPress(item)} style={{height: 200, width: 250}}>
 
             <Text style={styles.itemTitle}>{item.titulo}</Text>
             <Text style={styles.itemDate}>{item.fecha}</Text>
@@ -62,7 +71,8 @@ const MisSituacionesComponente = () => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Image source={{ uri: situacionSeleccionada?.foto }} style={styles.modalImage}  />
+    
+            <Image source={{ uri: `data:image/png;base64,${situacionSeleccionada?.foto} `}} style={styles.modalImage}  />
             <Text style={styles.modalText}>Código del reporte: {situacionSeleccionada?.id}</Text>
             <Text style={styles.modalText}>Fecha del reportado: {situacionSeleccionada?.fecha}</Text>
             <Text style={styles.modalText}> {situacionSeleccionada?.titulo}</Text>
