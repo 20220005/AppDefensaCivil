@@ -14,6 +14,7 @@ import NoticiasEspecificas from "./components/NoticiasEspecificas";
 import ExtraScreen from "./screens/ExtraScreen";
 import MededidasPreventivas from './components/MedidasPreventivas';
 import RecuperarContraseña from './components/RecuperarContraseña';
+import MapaInteractivo from './components/MapaInteractivo';
 
 const Drawer = createDrawerNavigator();
 
@@ -33,7 +34,7 @@ const App = () => {
        <Drawer.Screen name='Extras' component={ExtraScreen} />
        <Drawer.Screen name='MedidasPreventivas' component={MededidasPreventivas} />
        <Drawer.Screen name='Recuperar' component={RecuperarContraseña} />
-
+       <Drawer.Screen name='MapaAlbergues' component={MapaInteractivo} />
 
        
       </Drawer.Navigator>
