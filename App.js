@@ -34,15 +34,15 @@ const App = () => {
         <Drawer.Screen name='Videos' component={Videos} />
         <Drawer.Screen name='Albergues' component={Albergues} />
         <Drawer.Screen name='Noticias Especificas' component={NoticiasEspecificas} />
-       <Drawer.Screen name='Extras' component={ExtraScreen} />
-       <Drawer.Screen name='MedidasPreventivas' component={MededidasPreventivas} />
-       <Drawer.Screen name='Recuperar' component={RecuperarContraseña} />
-       <Drawer.Screen name='Cambiar Contraseña' component={CambiarContraseña} />
-       <Drawer.Screen name='MapaAlbergues' component={MapaInteractivo} />
-       <Drawer.Screen name='Mis Situaciones' component={MisSituaciones} />
-       <Drawer.Screen name='Reportar Situacion' component={ReportarSituaciones} />
+        <Drawer.Screen name='Extras' component={ExtraScreen} />
+        <Drawer.Screen name='MedidasPreventivas' component={MededidasPreventivas} />
+        <Drawer.Screen name='Recuperar' component={RecuperarContraseña} />
+        <Drawer.Screen name='Cambiar Contraseña' component={CambiarContraseña} />
+        <Drawer.Screen name='MapaAlbergues' component={MapaInteractivo} />
+        <Drawer.Screen name='Mis Situaciones' component={MisSituaciones} />
+        <Drawer.Screen name='Reportar Situacion' component={ReportarSituaciones} />
 
-       
+
       </Drawer.Navigator>
     </NavigationContainer>
   );

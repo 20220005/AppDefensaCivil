@@ -1,50 +1,108 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import React, { useEffect, useState, useRef } from 'react';
+import { View, Text, TextInput, FlatList, Pressable, StyleSheet } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import Loader from './Loader';
+import axios from 'axios';
 
-const NoticiasEspecificas = () => {
-  const route = useRoute();
-  const { userName, userToken } = route.params;
-  const [noticias, setNoticias] = useState([]);
+const Albergues = () => {
+  const [albergues, setAlbergues] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [expandedIndex, setExpandedIndex] = useState(null);
+  const flatListRef = useRef(null);
 
   useEffect(() => {
-    const formData = new FormData();
-    formData.append('token', userToken);
-
-    fetch('https://adamix.net/defensa_civil/def/noticias_especificas.php', {
-      method: 'POST',
-      body: formData,
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.exito) {
-        setNoticias(data.datos);
-      } else {
-        console.error('Error al obtener las noticias:', data.mensaje);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://adamix.net/defensa_civil/def/albergues.php');
+        setAlbergues(response.data.datos);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+        setLoading(false);
       }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  }, [userToken]);
+    };
 
-  const renderNoticia = ({ item }) => (
-    <View style={styles.noticiaContainer}>
-      <Text style={styles.titulo}>{item.titulo}</Text>
-      <Text style={styles.fecha}>{item.fecha}</Text>
-      {/* Agrega aquí más detalles si es necesario */}
-    </View>
+    fetchData();
+  }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (flatListRef.current) {
+        flatListRef.current.scrollToIndex({ animated: true, index: 0 });
+      }
+      setSearchQuery('');
+    }, [])
   );
+
+  const renderCard = ({ item, index }) => {
+    const capacidadText = item.capacidad ? item.capacidad : ' - ';
+    const isExpanded = expandedIndex === index;
+
+    return (
+      <Pressable
+        style={styles.card}
+        onPress={() => setExpandedIndex(isExpanded ? null : index)}
+      >
+        <Text style={styles.albergueCodigo}>{item.codigo}</Text>
+        <Text style={styles.cardTitle}>{item.edificio}</Text>
+        {isExpanded && (
+          <View style={styles.detailsContainer}>
+            <Text style={styles.details}><Text style={{ fontWeight: 'bold' }}>Ciudad: </Text>{item.ciudad}</Text>
+            <Text style={styles.details}><Text style={{ fontWeight: 'bold' }}>Coordinador: </Text>{item.coordinador}</Text>
+            <Text style={styles.details}><Text style={{ fontWeight: 'bold' }}>Télefono: </Text>{item.telefono}</Text>
+            <Text style={styles.details}><Text style={{ fontWeight: 'bold' }}>Capacidad: </Text>{capacidadText}</Text>
+            <Pressable style={styles.button}>
+              <Text style={styles.textButton}>Ver Ubicación</Text>
+            </Pressable>
+          </View>
+        )}
+      </Pressable>
+    );
+  };
+
+  const filterAlbergues = () => {
+    return albergues.filter(albergue =>
+      albergue.ciudad.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      albergue.edificio.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      albergue.coordinador.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      albergue.codigo.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.usuario}>Nombre del usuario: {userName}</Text>
-      <Text style={styles.token}>Token: {userToken}</Text>
-      <FlatList
-        data={noticias}
-        renderItem={renderNoticia}
-        keyExtractor={item => item.id}
+      <Text style={styles.title}>Albergues</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Buscar por ciudad, edificio, coordinador o código"
+        value={searchQuery}
+        onChangeText={text => setSearchQuery(text)}
       />
+      {searchQuery.length > 0 && (
+        <Text style={styles.searchResultText}>
+          Resultados de: {searchQuery}
+        </Text>
+      )}
+
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          {filterAlbergues().length > 0 ? (
+            <FlatList
+              data={filterAlbergues()}
+              renderItem={renderCard}
+              keyExtractor={item => item.codigo}
+              contentContainerStyle={styles.flatListContainer}
+              showsVerticalScrollIndicator={false}
+              ref={flatListRef}
+            />
+          ) : (
+            <Text style={styles.noResultsText}>No se encontraron resultados</Text>
+          )}
+        </>
+      )}
     </View>
   );
 };
@@ -56,33 +114,87 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 20,
   },
-  usuario: {
-    fontSize: 18,
+  title: {
+    fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#333',
-  },
-  token: {
-    fontSize: 18,
     marginBottom: 20,
-    color: '#333',
+    color: '#fb7405',
   },
-  noticiaContainer: {
-    backgroundColor: '#f0f0f0',
+  input: {
+    height: 40,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    marginBottom: 20,
+    fontSize: 16,
+    color: '#333',
+    width: '100%',
+  },
+  searchResultText: {
+    fontSize: 16,
+    color: '#666',
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  flatListContainer: {
+    paddingBottom: 20,
+  },
+  card: {
+    backgroundColor: '#0a509e',
     borderRadius: 10,
     marginBottom: 20,
     padding: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
-  titulo: {
+  albergueCodigo: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#fb7405',
+  },
+  cardTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#333',
+    color: '#fff',
   },
-  fecha: {
+  detailsContainer: {
+    marginTop: 10,
+  },
+  details: {
+    fontSize: 18,
+    marginBottom: 5,
+    color: '#fff',
+  },
+  button: {
+    backgroundColor: '#023063',
+    borderRadius: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginVertical: 10,
+    borderWidth: 1,
+    borderColor: '#fff',
+  },
+  textButton: {
+    color: '#fff',
+    textAlign: 'center',
     fontSize: 16,
-    color: '#666',
   },
+  noResultsText: {
+    fontSize: 18,
+    color: '#666',
+    textAlign: 'center',
+    marginTop: 20,
+  },
+
 });
 
-export default NoticiasEspecificas;
+export default Albergues;
