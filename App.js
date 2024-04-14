@@ -18,7 +18,7 @@ import CambiarContraseña from './components/CambiarContrasea';
 import MapaInteractivo from './components/MapaInteractivo';
 import MisSituaciones from './components/MisSituaciones';
 import ReportarSituaciones from './components/ReportarSituacion';
-
+import MapadeSituaciones from './components/MapaSituaciones';
 const Drawer = createDrawerNavigator();
 
 const App = () => {
@@ -41,6 +41,7 @@ const App = () => {
         <Drawer.Screen name='MapaAlbergues' component={MapaInteractivo} />
         <Drawer.Screen name='Mis Situaciones' component={MisSituaciones} />
         <Drawer.Screen name='Reportar Situacion' component={ReportarSituaciones} />
+        <Drawer.Screen name='Mapa de Situaciones' component={MapadeSituaciones} />
 
 
       </Drawer.Navigator>
