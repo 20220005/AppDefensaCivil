@@ -17,60 +17,62 @@ const Sidebar = ({ navigation }) => {
   const checkLoginStatus = async () => {
     try {
       const token = await AsyncStorage.getItem("token");
- 
+
       if (token) {
-        
+
         setIsLoggedIn(true);
       }
-      else{
+      else {
         setIsLoggedIn(false);
       }
     } catch (error) {
       console.error("Error al obtener el token de AsyncStorage:", error);
     }
   };
-  
+
   useEffect(() => {
-    
+
 
     checkLoginStatus();
-  }, [isLoggedIn,checkLoginStatus]);
+  }, [isLoggedIn, checkLoginStatus]);
 
-const logout = async () => {
-  try {
-    await AsyncStorage.removeItem("token");
-    await AsyncStorage.removeItem("nombre");
-    await AsyncStorage.removeItem("apellido");
-    await AsyncStorage.removeItem("correo");
-    await AsyncStorage.removeItem("telefono");
-    setIsLoggedIn(false);
-    navigation.navigate("Home");
-  } catch (error) {
-    console.error("Error al cerrar sesión:", error);
-  }
-};
+  const logout = async () => {
+    try {
+      await AsyncStorage.removeItem("token");
+      await AsyncStorage.removeItem("nombre");
+      await AsyncStorage.removeItem("apellido");
+      await AsyncStorage.removeItem("correo");
+      await AsyncStorage.removeItem("telefono");
+      setIsLoggedIn(false);
+      navigation.navigate("Home");
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
+  };
 
-const menuItems = [
+  const menuItems = [
     { key: "Home", title: "HOME" },
+    { key: "Historia", title: "HISTORIA" },
     { key: "Servicios", title: "SERVICIOS" },
     { key: "Noticias", title: "NOTICIAS" },
     { key: "Videos", title: "VIDEOS" },
     { key: "Albergues", title: "ALBERGUES" },
-    { key: "MapaAlbergues", title: "MAPA ALBERGUES" },
-    { key: "MedidasPreventivas", title: "MEDIDAS PREVENTIVAS" },
+    { key: "Mapa Albergues", title: "MAPA ALBERGUES" },
+    { key: "Medidas Preventivas", title: "MEDIDAS PREVENTIVAS" },
     { key: "Miembros", title: "MIEMBROS" },
-    { key: "QuieroSerVoluntario", title: "QUIERO SER VOLUNTARIO" },
+    { key: "Quiero Ser Voluntario", title: "QUIERO SER VOLUNTARIO" },
   ];
   const menuItemsLogin = [
     { key: "Home", title: "HOME" },
+    { key: "Historia", title: "HISTORIA" },
     { key: "Servicios", title: "SERVICIOS" },
     { key: "Noticias", title: "NOTICIAS" },
     { key: "Videos", title: "VIDEOS" },
     { key: "Albergues", title: "ALBERGUES" },
-    { key: "MapaAlbergues", title: "MAPA ALBERGUES" },
-    { key: "MedidasPreventivas", title: "MEDIDAS PREVENTIVAS" },
+    { key: "Mapa Albergues", title: "MAPA ALBERGUES" },
+    { key: "Medidas Preventivas", title: "MEDIDAS PREVENTIVAS" },
     { key: "Miembros", title: "MIEMBROS" },
-    { key: "QuieroSerVoluntario", title: "QUIERO SER VOLUNTARIO" },
+    { key: "Quiero Ser Voluntario", title: "QUIERO SER VOLUNTARIO" },
     { key: "Extras", title: "EXTRAS" },
 
   ];
@@ -110,10 +112,16 @@ const menuItems = [
       </View>
       <View style={styles.bottom}>
         <Pressable
-          style={{ ...styles.button, backgroundColor: "#0a509e" }}
-          onPress={() => navigation.navigate("Registrar")}
+          style={{ ...styles.button, backgroundColor: "#fb7405" }}
+          onPress={() => navigation.navigate("Acerca De")}
         >
-          <Text style={{...styles.text,color:'white'}}>REGISTRARSE</Text>
+          <Text style={{ ...styles.text, color: 'white' }}>ACERCA DE</Text>
+        </Pressable>
+        <Pressable
+          style={{ ...styles.button, backgroundColor: "#0a509e" }}
+          onPress={() => navigation.navigate("Quiero Ser Voluntario")}
+        >
+          <Text style={{ ...styles.text, color: 'white' }}>REGISTRARSE</Text>
         </Pressable>
 
         {isLoggedIn ? (
@@ -121,14 +129,14 @@ const menuItems = [
             style={{ ...styles.button, backgroundColor: "red" }}
             onPress={() => logout()}
           >
-            <Text style={{...styles.text,color:'white'}}>CERRAR SESIÓN</Text>
+            <Text style={{ ...styles.text, color: 'white' }}>CERRAR SESIÓN</Text>
           </Pressable>
         ) : (
           <Pressable
-            style={{ ...styles.button, backgroundColor: "#0a509e" ,}}
+            style={{ ...styles.button, backgroundColor: "#0a509e", }}
             onPress={() => navigation.navigate("Login")}
           >
-            <Text style={{...styles.text,color:'white'}}>INICIAR SESIÓN</Text>
+            <Text style={{ ...styles.text, color: 'white' }}>INICIAR SESIÓN</Text>
           </Pressable>
         )}
       </View>
@@ -157,17 +165,17 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   mid: {
-    flex:1,
+    flex: 1,
     height: "55%",
-    
+
 
   },
   flatlist: {
     flex: 1,
     padding: 10,
-    
+
   },
- 
+
   button: {
     alignItems: "center",
     justifyContent: "center",

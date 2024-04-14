@@ -22,11 +22,13 @@ const ServicesList = () => {
     fetchData();
   }, []);
 
-  const renderItem = ({ item }) => (
-    <View style={styles.serviceContainer}>
-      <Image source={{ uri: item.foto }} style={styles.serviceImage} />
-      <Text style={styles.serviceName}>{item.nombre}</Text>
-      <Text style={styles.serviceDescription}>{item.descripcion}</Text>
+  const renderServiceItem = ({ item }) => (
+    <View style={styles.serviceItem}>
+      <View style={styles.serviceInfo}>
+        <Image source={{ uri: item.foto }} style={styles.serviceImage} />
+        <Text style={styles.serviceName}>{item.nombre}</Text>
+        <Text style={styles.serviceDescription}>{item.descripcion}</Text>
+      </View>
     </View>
   );
 
@@ -34,13 +36,14 @@ const ServicesList = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Lista de Servicios</Text>
       {loading ? (
-      <Loader/>
+        <Loader />
       ) : (
         <FlatList
           data={services}
-          renderItem={renderItem}
+          renderItem={renderServiceItem}
           keyExtractor={item => item.id}
           contentContainerStyle={styles.flatListContainer}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
         />
       )}
     </View>
@@ -51,34 +54,51 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
   title: {
     fontSize: 24,
+    fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
     marginTop: 20,
+    color: '#fb7405',
   },
   flatListContainer: {
-    alignItems: 'center',
+    paddingBottom: 20,
   },
-  serviceContainer: {
+  serviceItem: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    backgroundColor: '#0a509e',
+    borderRadius: 10,
+    marginBottom: 2,
+    padding: 20,
   },
   serviceImage: {
-    width: 300,
-    height: 200,
+    width: '100%',
+    height: 140,
     borderRadius: 10,
-    marginBottom: 10,
+    marginBottom: 5,
+  },
+  serviceInfo: {
+    flex: 1,
   },
   serviceName: {
     fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 5,
+    color: '#fb7405',
   },
   serviceDescription: {
     fontSize: 16,
-    textAlign: 'center',
-    paddingHorizontal: 20,
+    color: '#fff',
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#fff',
+    marginVertical: 10,
   },
 });
 

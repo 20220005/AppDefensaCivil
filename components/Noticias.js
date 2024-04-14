@@ -4,12 +4,12 @@ import Loader from './Loader';
 import axios from 'axios';
 
 const Noticias = () => {
-const [noticias, setNoticias] = useState([]);
-const [loading, setLoading] = useState(true);
+  const [noticias, setNoticias] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
-    try {
+      try {
         const response = await axios.get('https://adamix.net/defensa_civil/def/noticias.php');
         setNoticias(response.data.datos);
         setLoading(false);
@@ -35,7 +35,7 @@ useEffect(() => {
     <View style={styles.container}>
       <Text style={styles.title}>Noticias</Text>
       {loading ? (
-        <Loader/>
+        <Loader />
       ) : (
         <FlatList
           data={noticias}
@@ -52,23 +52,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#0a509e',
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 30,
+    fontWeight: 'bold',
     marginBottom: 20,
-    marginTop: 20,
+    color: '#fb7405',
   },
   flatListContainer: {
     alignItems: 'center',
   },
   noticiaContainer: {
-    alignItems: 'center',
     marginBottom: 20,
+    width: '100%',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 12,
   },
   noticiaImage: {
     width: 300,
     height: 200,
+    borderRadius: 10,
     marginBottom: 10,
   },
   noticiaTitulo: {
@@ -79,6 +87,7 @@ const styles = StyleSheet.create({
   noticiaFecha: {
     fontSize: 16,
     marginBottom: 5,
+    color: '#fb7405',
   },
   noticiaContenido: {
     fontSize: 16,
