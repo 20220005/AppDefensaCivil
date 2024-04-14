@@ -70,7 +70,7 @@ const menuItems = [
     { key: "Mapa Albergues", title: "MAPA ALBERGUES" },
     { key: "Medidas Preventivas", title: "MEDIDAS PREVENTIVAS" },
     { key: "Miembros", title: "MIEMBROS" },
-    { key: "Registrar", title: "QUIERO SER VOLUNTARIO" },
+    { key: "Quiero Ser Voluntario", title: "QUIERO SER VOLUNTARIO" },
     { key: "Extras", title: "EXTRAS" },
 
   ];

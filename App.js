@@ -5,7 +5,7 @@ import Sidebar from './components/SideBar';
 import HomeScreen from './screens/HomeScreen';
 import Login from './components/Login';
 import Miembros from './components/Members';
-import Registrar from './components/RegisterForm';
+import QuieroSerVoluntario from './components/RegisterForm';
 import Servicios from './components/Services';
 import Noticias from "./components/Noticias"
 import Videos from "./components/Videos";
@@ -27,7 +27,7 @@ const App = () => {
       <Drawer.Navigator drawerContent={({ navigation }) => <Sidebar navigation={navigation} />}>
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Login" component={Login} />
-        <Drawer.Screen name="Quiero Ser Voluntario" component={Registrar} />
+        <Drawer.Screen name="Quiero Ser Voluntario" component={QuieroSerVoluntario} />
         <Drawer.Screen name='Miembros' component={Miembros} />
         <Drawer.Screen name='Servicios' component={Servicios} />
         <Drawer.Screen name='Noticias' component={Noticias} />
