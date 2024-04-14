@@ -3,7 +3,6 @@ import { View, Text, FlatList, TouchableOpacity, Modal, Button, Image, StyleShee
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from './Loader';
 import { useFocusEffect } from '@react-navigation/native';
-import { style } from 'deprecated-react-native-prop-types/DeprecatedViewPropTypes';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const MisSituacionesComponente = () => {

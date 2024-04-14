@@ -14,17 +14,26 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon-defensa-civil.png",
         "backgroundColor": "#ffffff"
+      },
+      "package": "com.zmrdev.GrupoCelaFinal",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCjsgRx7h0zGEaIUVPSxaPQdcoCk0aaLwk"
+        }
       }
     },
     "web": {
       "favicon": "./assets/icon-defensa-civil.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "cddda45e-ebcf-4222-a7f7-231627aeb0a4"
+      }
+    },
+    "owner": "zmrdev"
   }
 }
