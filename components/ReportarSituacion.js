@@ -15,12 +15,22 @@ const ReportForm = () => {
   const [latitud, setLatitud] = useState('');
   const [longitud, setLongitud] = useState('');
 
+
+  const clearForm = () => {
+    setTitulo('');
+    setDescripcion('');
+    setFotoBase64('');
+    setLatitud('');
+    setLongitud('');
+  }
+
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
+      aspect: [1, 1],
+      quality: 0.2,
       base64: true
     });
 
@@ -44,8 +54,8 @@ const ReportForm = () => {
       let result = await ImagePicker.launchCameraAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
+        aspect: [1, 1],
+        quality: 0.2,
         base64: true
       });
 
@@ -87,6 +97,7 @@ const ReportForm = () => {
       .then(data => {
         console.log(data);
         alert('Situación reportada con éxito')
+        clearForm();
 
       })
       .catch(error => {
@@ -102,7 +113,7 @@ const ReportForm = () => {
       </View>
       <View style={styles.container}>
 
-        <Image source={{ uri: `data:image/png;base64,${fotoBase64} ` }} style={styles.image} />
+        <Image source={{ uri: `data:image/jpge;base64,${fotoBase64} ` }} style={styles.image} />
         <TextInput
           style={styles.input}
           placeholder="Titulo"
