@@ -52,6 +52,7 @@ const logout = async () => {
 
 const menuItems = [
     { key: "Home", title: "HOME" },
+    { key: "Historia", title: "Historia" },
     { key: "Servicios", title: "SERVICIOS" },
     { key: "Noticias", title: "NOTICIAS" },
     { key: "Videos", title: "VIDEOS" },
@@ -63,6 +64,7 @@ const menuItems = [
   ];
   const menuItemsLogin = [
     { key: "Home", title: "HOME" },
+    { key: "Historia", title: "Historia" },
     { key: "Servicios", title: "SERVICIOS" },
     { key: "Noticias", title: "NOTICIAS" },
     { key: "Videos", title: "VIDEOS" },
