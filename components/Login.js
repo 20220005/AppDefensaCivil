@@ -5,13 +5,15 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Pressable
+  Image
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const LoginForm = () => {
   const [cedula, setCedula] = useState("");
   const [password, setPassword] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const navigation = useNavigation();
 
   const handleLogin = async () => {
@@ -53,11 +55,15 @@ const LoginForm = () => {
             userToken: responseData.datos.token,
           });
 
-         
+
           setCedula("");
           setPassword("");
         } else {
-          alert("Usuario o contraseña incorrectos.");
+          setAlertMessage("Usuario o contraseña incorrectos.");
+          setShowAlert(true);
+          setTimeout(() => {
+            setShowAlert(false);
+          }, 15000);
           console.log("Error al iniciar sesión:", responseData);
         }
       } catch (error) {
@@ -66,9 +72,21 @@ const LoginForm = () => {
     }
   };
 
+  const CustomAlert = ({ message }) => (
+    <View style={styles.customAlert}>
+      <Text style={styles.customAlertText}>{message}</Text>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
+      <Image
+        source={require("../assets/logo_defensa_civil_ultimate.png")}
+        style={styles.logo}
+        resizeMode="contain"
+      />
       <Text style={styles.title}>Inicio de Sesión</Text>
+      {showAlert && <CustomAlert message={alertMessage} />}
       <TextInput
         style={styles.input}
         placeholder="Cédula"
@@ -87,16 +105,13 @@ const LoginForm = () => {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
-
-      <Pressable
-            style={{ ...styles.button, backgroundColor: "#0a509e" ,}}
-            onPress={() => navigation.navigate("Recuperar")}
-          >
-            <Text style={{...styles.text,color:'white'}}>Recuperar Contraseña</Text>
-          </Pressable>
-
-
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Recuperar")}
+      >
+        <Text style={styles.recuperarTexto}>Recuperar Contraseña</Text>
+      </TouchableOpacity>
     </View>
+
   );
 };
 
@@ -107,9 +122,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fff",
   },
+  logo: {
+    width: 200,
+    height: 200,
+    marginBottom: 20,
+  },
   title: {
     fontSize: 24,
     marginBottom: 20,
+    fontWeight: '600',
   },
   input: {
     width: "80%",
@@ -121,14 +142,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: "blue",
+    backgroundColor: "#fb7405",
+    width: "80%",
     paddingVertical: 10,
-    paddingHorizontal: 20,
     borderRadius: 5,
-    marginBottom: 10
+    marginBottom: 10,
+    alignItems: "center",
   },
   buttonText: {
     color: "#fff",
+    fontSize: 16,
+  },
+  recuperarTexto: {
+    color: "#0a509e",
+    fontSize: 16,
+  },
+  customAlert: {
+    backgroundColor: "red",
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  customAlertText: {
+    color: "white",
     fontSize: 16,
   },
 });
