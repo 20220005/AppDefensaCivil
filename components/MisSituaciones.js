@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Modal, Button, Image, StyleSheet, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from './Loader';
+import { useFocusEffect } from '@react-navigation/native';
 
 const MisSituacionesComponente = () => {
   const [situaciones, setSituaciones] = useState([]);
@@ -22,7 +23,7 @@ const MisSituacionesComponente = () => {
       const data = await response.json();
       if (data.exito) {
         setSituaciones(data.datos);
-        console.log("dTOA",data.datos);
+        
       } else {
         console.error('Error al obtener las situaciones:', data.mensaje);
       }
@@ -31,9 +32,11 @@ const MisSituacionesComponente = () => {
     }
   };
 
-  useEffect(() => {
+  useFocusEffect(() => {
+
     obtenerSituaciones();
-  }, []);
+    
+  }, );
 
   const handleSituacionPress = (situacion) => {
     setSituacionSeleccionada(situacion);

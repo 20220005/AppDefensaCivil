@@ -8,6 +8,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 
 const ReportForm = () => {
+
   const [titulo, setTitulo] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [fotoBase64, setFotoBase64] = useState('');
@@ -86,6 +87,7 @@ const ReportForm = () => {
       .then(data => {
         console.log(data);
         alert('Situación reportada con éxito')
+       
       })
       .catch(error => {
         console.error('Error:', error);
@@ -96,7 +98,7 @@ const ReportForm = () => {
   return (
     <View style={styles.container}>
       
-     
+      <Image source={{ uri: `data:image/png;base64,${fotoBase64} `}} style={styles.image}  />
       <TextInput
         style={styles.input}
         placeholder="Titulo"
