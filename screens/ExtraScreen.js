@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList,Pressable } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
 
 const ExtraScreen = ({ navigation }) => {
 
@@ -9,9 +9,6 @@ const ExtraScreen = ({ navigation }) => {
     { key: "Mis Situaciones", title: "MIS SITUACIONES" },
     { key: "Mapa de Situaciones", title: "MAPA DE SITUACIONES" },
     { key: "Cambiar Contraseña", title: "CAMBIAR CONTRASEÑA" },
-   
-  
-
   ];
 
   const renderItem = ({ item }) => (
@@ -24,46 +21,41 @@ const ExtraScreen = ({ navigation }) => {
       </Pressable>
     </View>
   );
+
   return (
     <View style={styles.container}>
       <FlatList
-            data={menuItems}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.key}
-            style={styles.flatlist}
-          />
+        data={menuItems}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.key}
+        style={styles.flatlist}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "center",
-    height:'100%',
-    width:'100%',
-    backgroundColor: "#fff",
-    
-
+    alignItems: "center",
   },
   mid: {
-    flex:1,
-    height: "55%",
-    
-
+    marginVertical: 10,
+    justifyContent: "center",
+    alignItems: "center",
+   
   },
   flatlist: {
     flex: 1,
-    padding: 10,
-    
+    width: "100%",
+    marginVertical: 100,
   },
- 
   button: {
-   
-  
     padding: 10,
     borderRadius: 5,
+    marginVertical: 10, 
+    
   },
   text: {
     color: "#fb7405",
