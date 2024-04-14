@@ -52,7 +52,7 @@ const Sidebar = ({ navigation }) => {
 
   const menuItems = [
     { key: "Home", title: "HOME" },
-    { key: "Historia", title: "Historia" },
+    { key: "Historia", title: "HISTORIA" },
     { key: "Servicios", title: "SERVICIOS" },
     { key: "Noticias", title: "NOTICIAS" },
     { key: "Videos", title: "VIDEOS" },
@@ -64,7 +64,7 @@ const Sidebar = ({ navigation }) => {
   ];
   const menuItemsLogin = [
     { key: "Home", title: "HOME" },
-    { key: "Historia", title: "Historia" },
+    { key: "Historia", title: "HISTORIA" },
     { key: "Servicios", title: "SERVICIOS" },
     { key: "Noticias", title: "NOTICIAS" },
     { key: "Videos", title: "VIDEOS" },
