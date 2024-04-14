@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
 
 const RegisterForm = () => {
   const [cedula, setCedula] = useState('');
@@ -43,7 +43,9 @@ const RegisterForm = () => {
         } else {
           alert('Error al registrar');
           console.log('Error al registrar:', responseData);
-          setErrorMessage(responseData.mensaje);
+          setTimeout(() => {
+            setErrorMessage(responseData.mensaje);
+          }, 15000);
         }
       } catch (error) {
         console.error('Error al registrar:', error);
@@ -53,54 +55,66 @@ const RegisterForm = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Registro</Text>
-      {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
-      <TextInput
-        style={styles.input}
-        placeholder="Cédula"
-        value={cedula}
-        onChangeText={setCedula}
-        keyboardType="numeric"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Nombre"
-        value={nombre}
-        onChangeText={setNombre}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Apellido"
-        value={apellido}
-        onChangeText={setApellido}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Clave"
-        value={clave}
-        onChangeText={setClave}
-        secureTextEntry={true}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Correo electrónico"
-        value={correo}
-        onChangeText={setCorreo}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Teléfono"
-        value={telefono}
-        onChangeText={setTelefono}
-        keyboardType="phone-pad"
-      />
-      <TouchableOpacity style={styles.button} onPress={handleRegister}>
-        <Text style={styles.buttonText}>Registrar</Text>
-      </TouchableOpacity>
-    </View>
+    <>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>¿Quieres ser parte del voluntariado
+          de la Defensa Civil? Regístrate</Text>
+      </View>
+      <View style={styles.container}>
+        <Image
+          source={require("../assets/logo_defensa_civil_ultimate.png")}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+        <Text style={styles.title}>Registro</Text>
+        {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
+        <TextInput
+          style={styles.input}
+          placeholder="Cédula"
+          value={cedula}
+          onChangeText={setCedula}
+          keyboardType="numeric"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Nombre"
+          value={nombre}
+          onChangeText={setNombre}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Apellido"
+          value={apellido}
+          onChangeText={setApellido}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Clave"
+          value={clave}
+          onChangeText={setClave}
+          secureTextEntry={true}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Correo electrónico"
+          value={correo}
+          onChangeText={setCorreo}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Teléfono"
+          value={telefono}
+          onChangeText={setTelefono}
+          keyboardType="phone-pad"
+        />
+        <TouchableOpacity style={styles.button} onPress={handleRegister}>
+          <Text style={styles.buttonText}>Registrar</Text>
+        </TouchableOpacity>
+      </View>
+    </>
+
   );
 };
 
@@ -111,24 +125,45 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
   },
+  logo: {
+    width: 150,
+    height: 150,
+    marginBottom: 20,
+  },
+  header: {
+    backgroundColor: '#fb7405',
+    width: '100%',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginBottom: 10,
+  },
+  headerText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 5,
+  },
   title: {
     fontSize: 24,
     marginBottom: 20,
+    fontWeight: '600',
   },
   input: {
-    width: '80%',
+    width: "80%",
     height: 40,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 5,
     marginBottom: 10,
     paddingHorizontal: 10,
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: "#fb7405",
+    width: "80%",
     paddingVertical: 10,
-    paddingHorizontal: 20,
     borderRadius: 5,
+    marginBottom: 10,
+    alignItems: "center",
   },
   buttonText: {
     color: '#fff',

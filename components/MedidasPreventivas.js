@@ -60,12 +60,14 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     backgroundColor: "#fff",
-    paddingTop: windowHeight * 0.05,
+    paddingTop: windowHeight * 0.01,
   },
   title: {
     fontSize: windowWidth * 0.08, 
     marginBottom: windowHeight * 0.03, 
-    marginTop: windowHeight * 0.03, 
+    marginTop: windowHeight * 0.02, 
+    color: "#fb7405",
+    fontWeight: 'bold',
   },
   flatListContainer: {
     alignItems: "center",
@@ -75,22 +77,26 @@ const styles = StyleSheet.create({
     marginBottom: windowHeight * 0.05, 
     width: windowWidth - windowWidth * 0.1, 
     alignItems: "center",
+    backgroundColor: "#0a509e", // Color de fondo
+    borderRadius: 10, // Bordes redondeados
   },
   mededidatitulo: {
     fontSize: windowWidth * 0.06, 
     fontWeight: "bold",
     marginBottom: windowHeight * 0.02, 
+    color: "#fb7405", // Color del texto
   },
   medidaImagen: {
     width: windowWidth - windowWidth * 0.1,
     height: windowHeight * 0.3,
     resizeMode: "contain",
     marginBottom: windowHeight * 0.02, 
-    borderRadius: windowWidth * 0.02, 
+    borderRadius: 10, // Bordes redondeados
   },
   medidasDescripcion: {
     fontSize: windowWidth * 0.04,
     marginBottom: windowHeight * 0.02,
+    color: "#fff", // Color del texto
   },
 });
 
