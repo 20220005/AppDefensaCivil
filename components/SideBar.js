@@ -56,10 +56,10 @@ const menuItems = [
     { key: "Noticias", title: "NOTICIAS" },
     { key: "Videos", title: "VIDEOS" },
     { key: "Albergues", title: "ALBERGUES" },
-    { key: "MapaAlbergues", title: "MAPA ALBERGUES" },
-    { key: "MedidasPreventivas", title: "MEDIDAS PREVENTIVAS" },
+    { key: "Mapa Albergues", title: "MAPA ALBERGUES" },
+    { key: "Medidas Preventivas", title: "MEDIDAS PREVENTIVAS" },
     { key: "Miembros", title: "MIEMBROS" },
-    { key: "QuieroSerVoluntario", title: "QUIERO SER VOLUNTARIO" },
+    { key: "Quiero Ser Voluntario", title: "QUIERO SER VOLUNTARIO" },
   ];
   const menuItemsLogin = [
     { key: "Home", title: "HOME" },
@@ -67,10 +67,10 @@ const menuItems = [
     { key: "Noticias", title: "NOTICIAS" },
     { key: "Videos", title: "VIDEOS" },
     { key: "Albergues", title: "ALBERGUES" },
-    { key: "MapaAlbergues", title: "MAPA ALBERGUES" },
-    { key: "MedidasPreventivas", title: "MEDIDAS PREVENTIVAS" },
+    { key: "Mapa Albergues", title: "MAPA ALBERGUES" },
+    { key: "Medidas Preventivas", title: "MEDIDAS PREVENTIVAS" },
     { key: "Miembros", title: "MIEMBROS" },
-    { key: "QuieroSerVoluntario", title: "QUIERO SER VOLUNTARIO" },
+    { key: "Registrar", title: "QUIERO SER VOLUNTARIO" },
     { key: "Extras", title: "EXTRAS" },
 
   ];
@@ -111,7 +111,7 @@ const menuItems = [
       <View style={styles.bottom}>
         <Pressable
           style={{ ...styles.button, backgroundColor: "#0a509e" }}
-          onPress={() => navigation.navigate("Registrar")}
+          onPress={() => navigation.navigate("Quiero Ser Voluntario")}
         >
           <Text style={{...styles.text,color:'white'}}>REGISTRARSE</Text>
         </Pressable>
