@@ -54,9 +54,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   title: {
-    fontSize: 24,
-    marginBottom: 20,
+    fontSize: 30,
+    fontWeight: 'bold',
     marginTop: 20,
+    marginBottom: 20,
+    color: '#fb7405',
   },
   flatListContainer: {
     alignItems: 'center',
@@ -64,6 +66,9 @@ const styles = StyleSheet.create({
   memberContainer: {
     alignItems: 'center',
     marginBottom: 20,
+    padding: 5,
+    marginHorizontal: 5,
+    justifyContent: 'center',
   },
   memberImage: {
     width: 100,
@@ -72,11 +77,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   memberName: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
+    color: '#0a509e',
+    textAlign: 'center',
   },
   memberCargo: {
     fontSize: 16,
+    color: '#0a509e',
   },
 });
 

@@ -59,8 +59,8 @@ const MapaInteractivo = () => {
         {albergues.map((albergue, index) => (
           <TouchableOpacity key={index} onPress={() => moveToMarker(albergue)}>
             <View style={styles.albergueItem}>
-              <Text>{albergue.edificio}</Text>
-              <Text>{albergue.ciudad}</Text>
+              <Text style={styles.albergueText}>{albergue.edificio}</Text>
+              <Text style={styles.albergueText}>{albergue.ciudad}</Text>
             </View>
           </TouchableOpacity>
         ))}
@@ -80,13 +80,16 @@ const styles = StyleSheet.create({
   },
   albergueList: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fb7405',
     padding: 10,
   },
   albergueItem: {
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+  },
+  albergueText: {
+    color: '#fff',
   },
 });
 
