@@ -20,6 +20,7 @@ import MisSituaciones from './components/MisSituaciones';
 import ReportarSituaciones from './components/ReportarSituacion';
 import MapadeSituaciones from './components/MapaSituaciones';
 import Historia from './components/Historia';
+import AcercaDe from './components/AcercaDe';
 const Drawer = createDrawerNavigator();
 
 const App = () => {
@@ -44,6 +45,7 @@ const App = () => {
         <Drawer.Screen name='Mis Situaciones' component={MisSituaciones} />
         <Drawer.Screen name='Reportar Situacion' component={ReportarSituaciones} />
         <Drawer.Screen name='Mapa de Situaciones' component={MapadeSituaciones} />
+        <Drawer.Screen name='Acerca De' component={AcercaDe} />
         
       </Drawer.Navigator>
     </NavigationContainer>
