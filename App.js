@@ -19,6 +19,7 @@ import MapaInteractivo from './components/MapaInteractivo';
 import MisSituaciones from './components/MisSituaciones';
 import ReportarSituaciones from './components/ReportarSituacion';
 import MapadeSituaciones from './components/MapaSituaciones';
+import Historia from './components/Historia';
 const Drawer = createDrawerNavigator();
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
     <NavigationContainer>
       <Drawer.Navigator drawerContent={({ navigation }) => <Sidebar navigation={navigation} />}>
         <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Historia" component={Historia} />
         <Drawer.Screen name="Login" component={Login} />
         <Drawer.Screen name="Quiero Ser Voluntario" component={QuieroSerVoluntario} />
         <Drawer.Screen name='Miembros' component={Miembros} />
