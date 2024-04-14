@@ -3,6 +3,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import React, {  useState } from "react";
 import { View, StyleSheet, Dimensions,Text, TouchableOpacity } from "react-native";
 import MapView, {Marker} from "react-native-maps";
+import { PROVIDER_GOOGLE } from "react-native-maps";
 
 
 const MapaSituacion = () => {
@@ -45,6 +46,8 @@ const MapaSituacion = () => {
                     latitudeDelta: 0.05,
                     longitudeDelta: 0.05
                 }}
+                provider={PROVIDER_GOOGLE}
+                providerApiKey='AIzaSyCjsgRx7h0zGEaIUVPSxaPQdcoCk0aaLwk'
                 showsMyLocationButton={true}
             >
                 {situacion.map((situacion, index) => (

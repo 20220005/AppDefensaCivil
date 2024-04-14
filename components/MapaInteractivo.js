@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Dimensions, Text, ScrollView, TouchableOpacity } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import axios from 'axios';
-
+import { PROVIDER_GOOGLE } from "react-native-maps";
 const MapaInteractivo = () => {
   const [albergues, setAlbergues] = useState([]);
   const [selectedAlbergue, setSelectedAlbergue] = useState(null);
@@ -40,6 +40,8 @@ const MapaInteractivo = () => {
           latitudeDelta: 0.05,
           longitudeDelta: 0.05,
         }}
+        provider={PROVIDER_GOOGLE}
+        providerApiKey='AIzaSyCjsgRx7h0zGEaIUVPSxaPQdcoCk0aaLwk'
         showsMyLocationButton={true}
       >
         {albergues.map((albergue, index) => (
