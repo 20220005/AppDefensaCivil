@@ -28,7 +28,11 @@ const RecuperarContraseña = () => {
 
             const responseData = await response.json();
             setMensaje(responseData.mensaje);
-
+            setCedula("");
+            setCorreo("");
+            setTimeout(() => {
+                setMensaje("");
+            }, 3000);
             if (!responseData.exito) {
                 setTimeout(() => {
                     setMensaje("");
@@ -72,7 +76,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        paddingHorizontal: 20,
+        backgroundColor: "#fff",
     },
     logo: {
         width: 200,
@@ -81,16 +85,16 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 24,
-        fontWeight: "bold",
         marginBottom: 20,
+        fontWeight: '600',
     },
     input: {
-        height: 40,
         width: "80%",
-        borderColor: "#ccc",
+        height: 40,
         borderWidth: 1,
+        borderColor: "#ccc",
         borderRadius: 5,
-        marginBottom: 20,
+        marginBottom: 10,
         paddingHorizontal: 10,
     },
     button: {
@@ -103,8 +107,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: "#fff",
-        fontWeight: "bold",
-        textAlign: "center",
+        fontSize: 16,
     },
     message: {
         color: "red",
