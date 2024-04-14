@@ -3,6 +3,8 @@ import { View, Text, FlatList, TouchableOpacity, Modal, Button, Image, StyleShee
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from './Loader';
 import { useFocusEffect } from '@react-navigation/native';
+import { style } from 'deprecated-react-native-prop-types/DeprecatedViewPropTypes';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const MisSituacionesComponente = () => {
   const [situaciones, setSituaciones] = useState([]);
@@ -57,12 +59,13 @@ const MisSituacionesComponente = () => {
         data={situaciones}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleSituacionPress(item)} style={{height: 200, width: 250}}>
+          <TouchableOpacity onPress={() => handleSituacionPress(item)} style={styles.card}>
 
+            <Text style={styles.itemId}>#{item.id}</Text>
             <Text style={styles.itemTitle}>{item.titulo}</Text>
-            <Text style={styles.itemDate}>{item.fecha}</Text>
           </TouchableOpacity>
         )}
+        style={{ width: '100%' }}
       />
       <Modal
         animationType="slide"
@@ -76,11 +79,15 @@ const MisSituacionesComponente = () => {
           <View style={styles.modalContent}>
     
             <Image source={{ uri: `data:image/png;base64,${situacionSeleccionada?.foto} `}} style={styles.modalImage}  />
-            <Text style={styles.modalText}>Código del reporte: {situacionSeleccionada?.id}</Text>
-            <Text style={styles.modalText}>Fecha del reportado: {situacionSeleccionada?.fecha}</Text>
-            <Text style={styles.modalText}> {situacionSeleccionada?.titulo}</Text>
-            <Text style={styles.modalText}>Descripción del evento: {situacionSeleccionada?.descripcion}</Text>
-            <Text style={styles.modalText}>Estado actual del reporte: {situacionSeleccionada?.estado}</Text>
+            <View style={styles.topid}>
+            <Text style={{...styles.modalText,color:'#fb7405'}}># {situacionSeleccionada?.id}</Text>
+            <Text style={{...styles.modalText,color:'#fb7405'}}>{situacionSeleccionada?.fecha}</Text>
+            </View>
+            <ScrollView style={{ maxHeight:100 }}>
+            <Text style={{...styles.modalText,fontSize:25}}> {situacionSeleccionada?.titulo}</Text>
+            </ScrollView>
+            <Text style={styles.modalText}> {situacionSeleccionada?.descripcion}</Text>
+            <Text style={styles.modalText}>Estado: {situacionSeleccionada?.estado}</Text>
          
            <TouchableOpacity style={styles.button} onPress={() => setModalVisible(false)}>
 
@@ -104,56 +111,69 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 20,
+    color: '#fb7405',
   },
-  itemContainer: {
+  card: {
     marginBottom: 10,
-    padding: 10,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 5,
+    padding: 15,
+    backgroundColor: '#0a509e',
+    borderRadius: 10,
+    elevation: 5,
   },
   itemTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
+    color: '#ffffff',
   },
-  itemDate: {
-    fontSize: 14,
+  itemId: {
+    fontSize: 16,
+    color: '#fb7405',
   },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: '#fff',
   },
   modalContent: {
-    backgroundColor: 'white',
+    backgroundColor: '#0a509e',
     padding: 20,
     borderRadius: 10,
-    width: '80%',
+    width: '90%',
+    maxWidth: 400,
   },
   modalText: {
-    fontSize: 16,
+    fontSize: 14,
     marginBottom: 10,
+    color: 'white',
+    fontWeight: 'bold',
   },
   modalImage: {
     width: '100%',
     height: 200,
     marginBottom: 10,
+    borderRadius: 10,
   },
-  button:{
-    backgroundColor: "blue",
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 10,
+  button: {
+    backgroundColor: '#fb7405',
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 20,
+    alignItems: 'center',
   },
-  buttonText:{
-    color: "#fff",
-    fontWeight: "bold",
-    textAlign: "center",
-  
+  buttonText: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  topid:{
+    flexDirection:'row',
+    justifyContent:'space-between',
   }
 });
+
 
 export default MisSituacionesComponente;
