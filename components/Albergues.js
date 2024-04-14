@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, Text, TextInput, FlatList, Pressable, StyleSheet } from 'react-native';
+import { View, Text, TextInput, FlatList, Pressable, StyleSheet, Image } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import Loader from './Loader';
 import axios from 'axios';
@@ -57,6 +57,10 @@ const Albergues = () => {
             </Pressable>
           </View>
         )}
+        {/* Icono en la esquina superior derecha */}
+        <View style={styles.iconContainer}>
+          <Image source={require('../assets/icons8-down-arrow-50.png')} style={styles.icon} />
+        </View>
       </Pressable>
     );
   };
@@ -153,6 +157,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    position: 'relative', // Para permitir el posicionamiento absoluto del icono
   },
   albergueCodigo: {
     fontSize: 18,
@@ -194,7 +199,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 20,
   },
-
+  iconContainer: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    width: 24, // Ancho del icono
+    height: 24, // Altura del icono
+  },
+  icon: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
+  },
 });
 
 export default Albergues;
