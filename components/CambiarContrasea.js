@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useState, useEffect } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useState } from "react";
 import { TextInput, View, Text, Pressable, StyleSheet, Image } from "react-native";
 
 const CambiarContraseña = () => {
@@ -14,9 +15,9 @@ const CambiarContraseña = () => {
         });
     }
 
-    useEffect(() => {
+    useFocusEffect(() => {
         ObtenerToken();
-    }, []);
+    }, );
 
     const handleSubmit = async () => {
         const antiguaValue = claveantigua.trim();
@@ -40,6 +41,9 @@ const CambiarContraseña = () => {
                 const responseData = await response.json();
                 if (response.data) {
                     setMensaje(responseData.mensaje);
+                    setTimeout(() => {
+                        setMensaje("");
+                    }, 3000);
                 } else {
                     setMensaje(responseData.mensaje);
                     setTimeout(() => {
