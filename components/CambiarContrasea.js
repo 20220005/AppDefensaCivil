@@ -9,6 +9,8 @@ const CambiarContraseña = () => {
     const [token, setToken] = useState("");
     const [mensaje, setMensaje] = useState("");
 
+
+  
     const ObtenerToken = async () => {
         AsyncStorage.getItem('token').then((e) => {
             setToken(e);
@@ -41,13 +43,18 @@ const CambiarContraseña = () => {
                 const responseData = await response.json();
                 if (response.data) {
                     setMensaje(responseData.mensaje);
+                    
                     setTimeout(() => {
                         setMensaje("");
+                        setClaveAntigua("");
+                        setClaveNueva("");
                     }, 3000);
                 } else {
                     setMensaje(responseData.mensaje);
                     setTimeout(() => {
                         setMensaje("");
+                        setClaveAntigua("");
+                        setClaveNueva("");
                     }, 3000);
                 }
             } catch (error) {
